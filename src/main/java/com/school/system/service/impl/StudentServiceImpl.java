@@ -40,4 +40,24 @@ public class StudentServiceImpl implements StudentService {
         criteria.andIdEqualTo(student.getId());
         return studentMapper.updateByExampleSelective(student, studentExample);
     }
+
+    @Override
+    public List<Student> getAllStudents() {
+        return studentMapper.selectByExample(new StudentExample());
+    }
+
+    @Override
+    public Student getStudentById(String id) {
+        return studentMapper.selectByPrimaryKey(Integer.parseInt(id));
+    }
+
+    @Override
+    public int insertStudent(Student student) {
+        return studentMapper.insert(student);
+    }
+
+    @Override
+    public int deleteById(int id) {
+        return studentMapper.deleteByPrimaryKey(id);
+    }
 }

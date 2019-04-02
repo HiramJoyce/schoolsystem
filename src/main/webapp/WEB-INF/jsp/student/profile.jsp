@@ -120,7 +120,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="cc-password" class="control-label mb-1">密码</label>
-                                            <input id="cc-password" name="sPassword" type="password" class="form-control" value="${student.studentPassword}" data-val="true">
+                                            <input id="cc-password" name="studentPassword" type="password" class="form-control" value="${student.studentPassword}" data-val="true">
                                             <span class="help-block" data-valmsg-for="cc-number"
                                                   data-valmsg-replace="true"></span>
                                         </div>

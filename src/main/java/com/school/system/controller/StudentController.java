@@ -1,7 +1,8 @@
 package com.school.system.controller;
 
-import com.school.system.domain.Course;
+import com.alibaba.druid.util.StringUtils;
 import com.school.system.domain.Student;
+import com.school.system.domain.dto.MajorCourseDto;
 import com.school.system.service.CourseService;
 import com.school.system.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,10 @@ public class StudentController {
     }
 
     @GetMapping("select")
-    public String select(Model model) {
-        List<Course> allCourses = courseService.getAllOptionalCourses();
+    public String select(HttpSession session, Model model) {
+//        List<Course> allCourses = courseService.getAllOptionalCourses();
+        Student student = studentService.getStudentBySNum((String) session.getAttribute("studentNum"));
+        List<MajorCourseDto> allCourses = courseService.getAllMajorOptionalCourses(student.getStudentMajorId());
         model.addAttribute("courses", allCourses);
         return "student/select";
     }
@@ -64,5 +67,37 @@ public class StudentController {
     public String update(Student student) {
         studentService.updateStudent(student);
         return "redirect:/student/profile";
+    }
+
+    @GetMapping("adminUpdate")
+    public String update(String id, Model model) {
+        if (id != null && !StringUtils.equals(id, "")) {
+            Student student = studentService.getStudentById(id);
+            model.addAttribute("student", student);
+        } else {
+            model.addAttribute("student", new Student());
+        }
+        return "admin/studentUpdate";
+    }
+
+    @PostMapping("adminUpdate")
+    public String adminUpdate(Student student) {
+        if (student.getId() != null) {
+            studentService.updateStudent(student);
+        } else {
+            studentService.insertStudent(student);
+        }
+        return "redirect:/admin/student";
+    }
+
+    @RequestMapping("delete")
+    public String delete(String id) {
+        if (id != null) {
+            String ids[] = id.split(",");
+            for (String id1 : ids) {
+                studentService.deleteById(Integer.parseInt(id1));
+            }
+        }
+        return "redirect:/admin/student";
     }
 }

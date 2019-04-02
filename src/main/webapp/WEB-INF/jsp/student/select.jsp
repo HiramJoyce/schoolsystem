@@ -105,17 +105,17 @@
                                                 <td><span class="name">${course.courseWeekday}</span></td>
                                                 <td><span class="name">${course.courseTime}</span>
                                                 </td>
-                                                <td><span class="name">${course.courseTeacherid}</span>
+                                                <td><span class="name">${course.courseTeacherName}</span>
                                                 </td>
-                                                <td><span>${course.courseTeacherid}</span></td>
+                                                <td><span>${course.couseMajorName}</span></td>
                                                 <td><span>${course.coursePlace}</span></td>
                                                 <td style="text-align: left;">
-                                                    <button onclick="window.location.href='${ctx}/boss/apply?id=${course.id}&see=1'"
+                                                    <button onclick="window.location.href='${ctx}/course/select?id=${course.id}'"
                                                             type="button" class="btn btn-info btn-sm btn-block"
                                                             style="width: auto; margin: 0;">
                                                         选课
                                                     </button>
-                                                    <button onclick="window.location.href='${ctx}/boss/pass?id=${course.id}'"
+                                                    <button onclick="window.location.href='${ctx}/course/unSelect?id=${course.id}'"
                                                             type="button" class="btn btn-danger btn-sm btn-block"
                                                             style="width: auto; margin: 0;">
                                                         退课
