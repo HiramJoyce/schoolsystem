@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Ela Admin - HTML5 Admin Template</title>
+    <title>教学评估</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="${ctx}/resource/admin/assets/css/normalize.css">
@@ -34,10 +34,10 @@
                 <li>
                     <a href="${ctx}/student/select"> <i class="menu-icon fa fa-clipboard"></i>在线选课</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="${ctx}/student/profile"> <i class="menu-icon fa fa-user-md"></i>个人信息</a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="${ctx}/student/evaluate"> <i class="menu-icon fa fa-user-md"></i>教学评估</a>
                 </li>
             </ul>
@@ -83,54 +83,50 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">个人信息</strong>
+                            <strong class="card-title">教师评价</strong>
                         </div>
                         <div class="card-body">
                             <div id="pay-invoice">
                                 <div class="card-body" style="width: 500px; margin: auto; float: none;">
-                                    <div class="card-title">
-                                        <h3 class="text-center">${student.studentName}</h3>
-                                    </div>
-                                    <hr>
-                                    <form action="${ctx}/student/update" method="post" novalidate="novalidate">
-                                        <input type="hidden" name="id" value="${student.id}">
-                                        <input type="hidden" name="studentNum" value="${student.studentNum}">
-                                        <input type="hidden" name="studentName" value="${student.studentName}">
-                                        <input type="hidden" name="studentClassId" value="${student.studentClassId}">
-                                        <input type="hidden" name="studentMajorId" value="${student.studentMajorId}">
+                                    <form action="${ctx}/student/evaluate" method="post" novalidate="novalidate">
+                                        <input type="hidden" name="id" value="${teacher.id}">
                                         <div class="form-group has-success">
                                             <label for="cc-name" class="control-label mb-1">姓名</label>
-                                            <input id="cc-name" name="cc-name" type="text" value="${student.studentName}" class="form-control cc-name valid" data-val="true" disabled data-val-required="" autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name">
+                                            <input id="cc-name" name="teacherName" type="text" disabled value="${teacher.teacherName}" class="form-control cc-name valid" data-val="true" data-val-required="" autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name">
                                             <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">学号</label>
-                                            <input id="cc-number" name="cc-number" type="text" disabled class="form-control cc-number identified visa" value="${student.studentNum}" data-val="true">
+                                            <label for="cc-number" class="control-label mb-1">编号</label>
+                                            <input id="cc-number" name="teacherNum" type="text" disabled class="form-control cc-number identified visa" value="${teacher.teacherNum}" data-val="true">
                                             <span class="help-block" data-valmsg-for="cc-number"
                                                   data-valmsg-replace="true"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="cc-email" class="control-label mb-1">班级</label>
-                                            <input id="cc-email" name="sClassid" type="text" disabled class="form-control" value="${student.studentClassId}" data-val="true">
-                                            <span class="help-block" data-valmsg-for="cc-number"
-                                                  data-valmsg-replace="true"></span>
+                                            <label for="cc-major" class="control-label mb-1">专业</label>
+                                            <select id="cc-major" name="teacherMajorId" type="text" disabled class="form-control cc-number identified visa" data-val="true">
+                                                <c:forEach items="${majors}" var="major">
+                                                    <option value="${major.id}" ${teacher.teacherMajorId == major.id ? "selected" : ""}>${major.majorName}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                        <input type="hidden" name="evaluateTeacherid" value="${teacher.id}">
+                                        <input type="hidden" name="evaluateStudentid" value="${sessionScope.id}">
+                                        <input type="hidden" id="rate" name="evaluateScore" value="">
+                                        <div class="form-group">
+                                            <label>评分</label>
+                                            <div class="demo">
+                                                <div id="default-demo"></div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="cc-phone" class="control-label mb-1">专业</label>
-                                            <input id="cc-phone" name="sMajorid" type="text" disabled class="form-control" value="${student.studentMajorId}" data-val="true">
-                                            <span class="help-block" data-valmsg-for="cc-number"
-                                                  data-valmsg-replace="true"></span>
+                                            <label for="cc-evaluate" class="control-label mb-1">评价</label>
+                                            <textarea id="cc-evaluate" name="evaluateComment" class="form-control cc-number identified visa" rows="5"></textarea>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="cc-password" class="control-label mb-1">密码</label>
-                                            <input id="cc-password" name="studentPassword" type="password" class="form-control" value="${student.studentPassword}" data-val="true">
-                                            <span class="help-block" data-valmsg-for="cc-number"
-                                                  data-valmsg-replace="true"></span>
-                                        </div>
+                                        <span style="color: grey; font-size: 13px;">重复评价无效</span>
                                         <div>
                                             <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                                 <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                                <span id="payment-button-amount">保存信息</span>
+                                                <span id="payment-button-amount">提交评价</span>
                                             </button>
                                         </div>
                                     </form>
@@ -149,5 +145,17 @@
 <script src="${ctx}/resource/admin/assets/js/popper.min.js"></script>
 <script src="${ctx}/resource/admin/assets/js/plugins.js"></script>
 <script src="${ctx}/resource/admin/assets/js/main.js"></script>
+<script src="${ctx}/resource/js/jquery-3.2.1.min.js"></script>
+<script src="${ctx}/resource/starrate/lib/jquery.raty.min.js"></script>
+<script>
+    $(function () {
+        $.fn.raty.defaults.path = '${ctx}/resource/starrate/lib/img';
+        $('#default-demo').raty({
+            click: function(score, evt) {
+                $("#rate").val(score)
+            }
+        });
+    });
+</script>
 </body>
 </html>

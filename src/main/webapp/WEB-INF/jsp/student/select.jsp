@@ -37,6 +37,9 @@
                 <li>
                     <a href="${ctx}/student/profile"> <i class="menu-icon fa fa-user-md"></i>个人信息</a>
                 </li>
+                <li>
+                    <a href="${ctx}/student/evaluate"> <i class="menu-icon fa fa-user-md"></i>教学评估</a>
+                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>
@@ -92,7 +95,6 @@
                                             <th>星期</th>
                                             <th>课时</th>
                                             <th>讲师</th>
-                                            <th>专业</th>
                                             <th>地点</th>
                                             <th></th>
                                         </tr>
@@ -127,7 +129,6 @@
                                                 </td>
                                                 <td><span class="name">${course.courseTeacherName}</span>
                                                 </td>
-                                                <td><span>${course.couseMajorName}</span></td>
                                                 <td><span>${course.coursePlace}</span></td>
                                                 <td style="text-align: left;">
                                                     <button onclick="window.location.href='${ctx}/course/select?id=${course.id}'"

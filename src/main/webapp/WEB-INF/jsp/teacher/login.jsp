@@ -22,7 +22,7 @@
 						<p>教师账户</p>
 						<div class="lowin-group">
 							<label>教师编号</label>
-							<input type="text" autocomplete="teacherNum" name="adminNum" class="lowin-input">
+							<input type="text" autocomplete="teacherNum" name="teacherNum" class="lowin-input">
 						</div>
 						<div class="lowin-group password-group">
 							<label>密码</label>
@@ -40,7 +40,7 @@
 	<script src="${ctx}/resource/login/auth.js"></script>
 	<script>
 		Auth.init({
-			login_url: '${ctx}/admin/login',
+			login_url: '${ctx}/teacher/login',
 			forgot_url: '#forgot'
 		});
 	</script>

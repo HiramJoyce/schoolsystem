@@ -27,20 +27,11 @@
     <nav class="navbar navbar-expand-sm navbar-default">
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="${ctx}/admin/teacher"><i class="menu-icon fa fa-calendar"></i>教师管理</a>
-                </li>
                 <li class="active">
-                    <a href="${ctx}/admin/student"> <i class="menu-icon fa fa-clipboard"></i>学生管理</a>
+                    <a href="${ctx}/teacher/index"><i class="menu-icon fa fa-calendar"></i>我的课表</a>
                 </li>
                 <li>
-                    <a href="${ctx}/admin/clazz"> <i class="menu-icon fa fa-clipboard"></i>班级管理</a>
-                </li>
-                <li>
-                    <a href="${ctx}/admin/course"> <i class="menu-icon fa fa-clipboard"></i>课程管理</a>
-                </li>
-                <li>
-                    <a href="${ctx}/admin/profile"> <i class="menu-icon fa fa-user-md"></i>个人信息</a>
+                    <a href="${ctx}/teacher/profile"> <i class="menu-icon fa fa-user-md"></i>个人信息</a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -82,11 +73,11 @@
             <div class="clearfix"></div>
             <div class="orders">
                 <div class="row">
-                    <div class="col-xl-8">
+                    <div class="col-xl-10">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="box-title">学生管理</h4>
-                                <button onclick="window.location.href='${ctx}/student/adminUpdate'" style="width: 50px; position: absolute; top: 15px; right: 75px; margin: 0;" class="btn btn-success btn-sm btn-block">添加</button>
+                                <button onclick="window.location.href='${ctx}/course/removeStudent'" style="width: 50px; position: absolute; top: 15px; right: 75px; margin: 0;" class="btn btn-success btn-sm btn-block">添加</button>
                                 <button onclick="deleteStudent()" style="width: 50px; position: absolute; top: 15px; right: 15px; margin: 0;" class="btn btn-danger btn-sm btn-block">删除</button>
                             </div>
                             <div class="card-body--">
@@ -100,7 +91,7 @@
                                             <th>学生编号</th>
                                             <th>专业</th>
                                             <th>班级</th>
-                                            <th>密码</th>
+                                            <th>论文</th>
                                             <th></th>
                                         </tr>
                                         </thead>
@@ -113,14 +104,14 @@
                                                 <td>${student.studentNum}</td>
                                                 <td>${student.studentMajorName}</td>
                                                 <td>${student.studentClassName}</td>
-                                                <td>${student.studentPassword}</td>
+                                                <td>${student.studentFile}</td>
                                                 <td>
-                                                    <button onclick="window.location.href='${ctx}/student/adminUpdate?id=${student.id}'"
+                                                    <button onclick="window.location.href='${ctx}/course/score?id=${student.id}'"
                                                             type="button" class="btn btn-info btn-sm btn-block"
                                                             style="width: auto; margin: 0;">
-                                                        修改
+                                                        评分
                                                     </button>
-                                                    <button onclick="window.location.href='${ctx}/student/delete?id=${student.id}'"
+                                                    <button onclick="window.location.href='${ctx}/course/removeStudent?id=${student.id}'"
                                                             type="button" class="btn btn-danger btn-sm btn-block"
                                                             style="width: auto; margin: 0;">
                                                         删除

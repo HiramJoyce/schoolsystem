@@ -29,19 +29,10 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="${ctx}/admin/teacher"><i class="menu-icon fa fa-calendar"></i>教师管理</a>
-                </li>
-                <li>
-                    <a href="${ctx}/admin/student"> <i class="menu-icon fa fa-clipboard"></i>学生管理</a>
-                </li>
-                <li>
-                    <a href="${ctx}/admin/clazz"> <i class="menu-icon fa fa-clipboard"></i>班级管理</a>
-                </li>
-                <li>
-                    <a href="${ctx}/admin/course"> <i class="menu-icon fa fa-clipboard"></i>课程管理</a>
+                    <a href="${ctx}/teacher/index"><i class="menu-icon fa fa-calendar"></i>我的课表</a>
                 </li>
                 <li class="active">
-                    <a href="${ctx}/admin/profile"> <i class="menu-icon fa fa-user-md"></i>个人信息</a>
+                    <a href="${ctx}/teacher/profile"> <i class="menu-icon fa fa-user-md"></i>个人信息</a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->

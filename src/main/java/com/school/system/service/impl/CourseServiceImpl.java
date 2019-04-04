@@ -2,12 +2,11 @@ package com.school.system.service.impl;
 
 import com.school.system.dao.CourseMapper;
 import com.school.system.dao.CourseStudentMapper;
-import com.school.system.domain.Course;
-import com.school.system.domain.CourseExample;
-import com.school.system.domain.CourseStudent;
-import com.school.system.domain.CourseStudentExample;
+import com.school.system.dao.MajorCourseMapper;
+import com.school.system.dao.StudentMapper;
+import com.school.system.domain.*;
 import com.school.system.domain.dto.CourseDto;
-import com.school.system.domain.dto.MajorCourseDto;
+import com.school.system.domain.dto.StudentFileDto;
 import com.school.system.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +20,10 @@ public class CourseServiceImpl implements CourseService {
     private CourseMapper courseMapper;
     @Autowired
     private CourseStudentMapper courseStudentMapper;
+    @Autowired
+    private MajorCourseMapper majorCourseMapper;
+    @Autowired
+    private StudentMapper studentMapper;
 
     @Override
     public List<Course> getAllCourses() {
@@ -60,8 +63,8 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<MajorCourseDto> getAllMajorOptionalCourses(int major) {
-        return courseMapper.selectAllMajorOptionalCourses(major);
+    public List<CourseDto> getAllOptionalCourseDtos() {
+        return courseMapper.selectAllOptionalCourseDtos();
     }
 
     @Override
@@ -90,5 +93,21 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<CourseDto> getAllCourseDtos() {
         return courseMapper.selectAllCourseDtos();
+    }
+
+    @Override
+    public CourseDto getCouseDtoById(Integer id) {
+        return courseMapper.selectCourseDtoById(id);
+    }
+
+    @Override
+    public List<StudentFileDto> getCourseStudentsByCourseId(int courseId) {
+        Course course = courseMapper.selectByPrimaryKey(courseId);
+        // 必修课
+        if (course.getCourseType() == 1) {
+            return studentMapper.selectStudentDtosByMajorId(courseId);
+        } else {    // 选修
+            return courseStudentMapper.selectStudentDtosByCourseId(courseId);
+        }
     }
 }

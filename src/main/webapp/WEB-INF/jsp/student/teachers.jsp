@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>管理系统</title>
+    <title>教学评估</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="${ctx}/resource/admin/assets/css/normalize.css">
@@ -28,19 +28,16 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="${ctx}/admin/teacher"><i class="menu-icon fa fa-calendar"></i>教师管理</a>
+                    <a href="${ctx}/student/index"><i class="menu-icon fa fa-calendar"></i>我的课表</a>
+                </li>
+                <li>
+                    <a href="${ctx}/student/select"> <i class="menu-icon fa fa-clipboard"></i>在线选课</a>
+                </li>
+                <li>
+                    <a href="${ctx}/student/profile"> <i class="menu-icon fa fa-user-md"></i>个人信息</a>
                 </li>
                 <li class="active">
-                    <a href="${ctx}/admin/student"> <i class="menu-icon fa fa-clipboard"></i>学生管理</a>
-                </li>
-                <li>
-                    <a href="${ctx}/admin/clazz"> <i class="menu-icon fa fa-clipboard"></i>班级管理</a>
-                </li>
-                <li>
-                    <a href="${ctx}/admin/course"> <i class="menu-icon fa fa-clipboard"></i>课程管理</a>
-                </li>
-                <li>
-                    <a href="${ctx}/admin/profile"> <i class="menu-icon fa fa-user-md"></i>个人信息</a>
+                    <a href="${ctx}/student/evaluate"> <i class="menu-icon fa fa-user-md"></i>教学评估</a>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
@@ -85,52 +82,40 @@
                     <div class="col-xl-8">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="box-title">学生管理</h4>
-                                <button onclick="window.location.href='${ctx}/student/adminUpdate'" style="width: 50px; position: absolute; top: 15px; right: 75px; margin: 0;" class="btn btn-success btn-sm btn-block">添加</button>
-                                <button onclick="deleteStudent()" style="width: 50px; position: absolute; top: 15px; right: 15px; margin: 0;" class="btn btn-danger btn-sm btn-block">删除</button>
+                                <h4 class="box-title">教学评估</h4>
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">
-                                    <form action="${ctx}/student/delete" id="students" method="post">
                                     <table class="table ">
                                         <thead>
                                         <tr>
                                             <th class="serial">#</th>
                                             <th>姓名</th>
-                                            <th>学生编号</th>
+                                            <th>教师编号</th>
                                             <th>专业</th>
-                                            <th>班级</th>
                                             <th>密码</th>
                                             <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${students}" var="student" varStatus="statu">
+                                        <c:forEach items="${teachers}" var="teacher" varStatus="statu">
                                             <tr>
-                                                <td class="serial"><input type="checkbox" name="id"
-                                                                          value="${student.id}"></td>
-                                                <td>${student.studentName}</td>
-                                                <td>${student.studentNum}</td>
-                                                <td>${student.studentMajorName}</td>
-                                                <td>${student.studentClassName}</td>
-                                                <td>${student.studentPassword}</td>
+                                                <td class="serial">${statu.index + 1}</td>
+                                                <td>${teacher.teacherName}</td>
+                                                <td>${teacher.teacherNum}</td>
+                                                <td>${teacher.teacherMajorName}</td>
+                                                <td>${teacher.teacherPassword}</td>
                                                 <td>
-                                                    <button onclick="window.location.href='${ctx}/student/adminUpdate?id=${student.id}'"
+                                                    <button onclick="window.location.href='${ctx}/student/evaluate?teacherId=${teacher.id}'"
                                                             type="button" class="btn btn-info btn-sm btn-block"
                                                             style="width: auto; margin: 0;">
-                                                        修改
-                                                    </button>
-                                                    <button onclick="window.location.href='${ctx}/student/delete?id=${student.id}'"
-                                                            type="button" class="btn btn-danger btn-sm btn-block"
-                                                            style="width: auto; margin: 0;">
-                                                        删除
+                                                        评价
                                                     </button>
                                                 </td>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
                                     </table>
-                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +132,7 @@
 <script src="${ctx}/resource/admin/assets/js/plugins.js"></script>
 <script src="${ctx}/resource/admin/assets/js/main.js"></script>
 <script>
-    function deleteStudent() {
+    function deleteTeacher() {
         let ids = "";
         $("input:checkbox[name='id']:checked").each(function () {
             ids += $(this).val() + ",";
@@ -161,7 +146,7 @@
             alert("请选择要删除的记录！");
             return;
         }
-        $("#students").submit();
+        $("#teachers").submit();
     }
 </script>
 </body>

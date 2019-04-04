@@ -1,5 +1,6 @@
 package com.school.system.service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.school.system.domain.Student;
 import com.school.system.domain.dto.StudentDto;
 
@@ -21,4 +22,6 @@ public interface StudentService {
     int deleteById(int parseInt);
 
     List<StudentDto> getAllStudentDtos();
+
+    JSONArray getStudentCourses(Integer studentId);
 }

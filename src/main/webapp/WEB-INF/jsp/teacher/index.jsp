@@ -89,13 +89,7 @@
 <script src="${ctx}/resource/coursetable/js/Timetables.min.js" type="text/javascript" charset="utf-8"></script>
 <!--Local Stuff-->
 <script>
-    var courseList = [
-        ['大学英语(Ⅳ)@10203', '大学英语(Ⅳ)@10203', '', '', '', '', '毛概@14208', '毛概@14208', '', ''],
-        ['', '', '信号与系统@11302', '信号与系统@11302', '模拟电子技术基础@16204', '模拟电子技术基础@16204', '', '', '', ''],
-        ['大学体育(Ⅳ)', '大学体育(Ⅳ)', '形势与政策(Ⅳ)@15208', '形势与政策(Ⅳ)@15208', '', '', '电路、信号与系统实验', '电路、信号与系统实验', '', ''],
-        ['', '', '', '', '电装实习@11301', '电装实习@11301', '', '', '大学体育', '大学体育'],
-        ['', '', '数据结构与算法分析', '数据结构与算法分析', '', '', '', '', '信号与系统', '信号与系统'],
-    ];
+    var courseList = ${courses};
     var week = window.innerWidth > 360 ? ['周一', '周二', '周三', '周四', '周五', '周六', '周日'] :
         ['一', '二', '三', '四', '五', '六', '日'];
     var day = new Date().getDay();
@@ -119,8 +113,8 @@
         timetableType: courseType,
         highlightWeek: day,
         gridOnClick: function (e) {
-            alert(e.name + '  ' + e.week + ', 第' + e.index + '节课, 课长' + e.length + '节');
             console.log(e);
+            window.location.href = "${ctx}/course/teacherInfo?id=" + e.name.split("#")[0]
         },
         styles: {
             Gheight: 50

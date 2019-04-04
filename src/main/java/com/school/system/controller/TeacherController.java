@@ -1,6 +1,7 @@
 package com.school.system.controller;
 
 import com.alibaba.druid.util.StringUtils;
+import com.alibaba.fastjson.JSONArray;
 import com.school.system.domain.Major;
 import com.school.system.domain.Teacher;
 import com.school.system.service.CourseService;
@@ -33,7 +34,9 @@ public class TeacherController {
     }
 
     @GetMapping("index")
-    public String index() {
+    public String index(HttpSession session, Model model) {
+        JSONArray courses = teacherService.getTeacherCourses((Integer) session.getAttribute("id"));
+        model.addAttribute("courses", courses);
         return "teacher/index";
     }
 
@@ -52,9 +55,9 @@ public class TeacherController {
             session.setAttribute("teacherNum", checkLogin.getTeacherNum());
             session.setAttribute("teacherName", checkLogin.getTeacherName());
             session.setAttribute("role", "teacher");
-            return "redirect:/teacherNum/index";
+            return "redirect:/teacher/index";
         }
-        return "redirect:/teacherNum/login";
+        return "redirect:/teacher/login";
     }
 
     @GetMapping("adminUpdate")

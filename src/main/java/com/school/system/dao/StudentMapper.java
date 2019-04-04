@@ -3,6 +3,7 @@ package com.school.system.dao;
 import com.school.system.domain.Student;
 import com.school.system.domain.StudentExample;
 import com.school.system.domain.dto.StudentDto;
+import com.school.system.domain.dto.StudentFileDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -97,4 +98,6 @@ public interface StudentMapper {
     int updateByPrimaryKey(Student record);
 
     List<StudentDto> selectAllStudentDtos();
+
+    List<StudentFileDto> selectStudentDtosByMajorId(Integer courseId);
 }

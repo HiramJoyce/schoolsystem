@@ -2,8 +2,11 @@ package com.school.system.dao;
 
 import com.school.system.domain.CourseStudent;
 import com.school.system.domain.CourseStudentExample;
-import java.util.List;
+import com.school.system.domain.dto.CourseDto;
+import com.school.system.domain.dto.StudentFileDto;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface CourseStudentMapper {
     /**
@@ -93,4 +96,8 @@ public interface CourseStudentMapper {
      * @mbg.generated Tue Apr 02 15:48:47 CST 2019
      */
     int updateByPrimaryKey(CourseStudent record);
+
+    List<CourseDto> selectCourseDtosByStudentId(Integer studentId);
+
+    List<StudentFileDto> selectStudentDtosByCourseId(Integer courseId);
 }

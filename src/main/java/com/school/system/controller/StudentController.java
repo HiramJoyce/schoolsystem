@@ -1,14 +1,11 @@
 package com.school.system.controller;
 
 import com.alibaba.druid.util.StringUtils;
-import com.school.system.domain.Clazz;
-import com.school.system.domain.Major;
-import com.school.system.domain.Student;
-import com.school.system.domain.dto.MajorCourseDto;
-import com.school.system.service.ClazzService;
-import com.school.system.service.CourseService;
-import com.school.system.service.MajorService;
-import com.school.system.service.StudentService;
+import com.alibaba.fastjson.JSONArray;
+import com.school.system.domain.*;
+import com.school.system.domain.dto.CourseDto;
+import com.school.system.domain.dto.TeacherDto;
+import com.school.system.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +28,10 @@ public class StudentController {
     private MajorService majorService;
     @Autowired
     private ClazzService clazzService;
+    @Autowired
+    private TeacherService teacherService;
+    @Autowired
+    private EvaluateService evaluateService;
 
     @GetMapping("login")
     public String login() {
@@ -38,15 +39,15 @@ public class StudentController {
     }
 
     @GetMapping("index")
-    public String index() {
+    public String index(HttpSession session, Model model) {
+        JSONArray courses = studentService.getStudentCourses((Integer) session.getAttribute("id"));
+        model.addAttribute("courses", courses);
         return "student/index";
     }
 
     @GetMapping("select")
-    public String select(HttpSession session, Model model) {
-//        List<Course> allCourses = courseService.getAllOptionalCourses();
-        Student student = studentService.getStudentBySNum((String) session.getAttribute("studentNum"));
-        List<MajorCourseDto> allCourses = courseService.getAllMajorOptionalCourses(student.getStudentMajorId());
+    public String select(Model model) {
+        List<CourseDto> allCourses = courseService.getAllOptionalCourseDtos();
         model.addAttribute("courses", allCourses);
         return "student/select";
     }
@@ -56,6 +57,27 @@ public class StudentController {
         Student student = studentService.getStudentBySNum((String) session.getAttribute("studentNum"));
         model.addAttribute("student", student);
         return "student/profile";
+    }
+
+    @GetMapping("evaluate")
+    public String evaluate(String teacherId, Model model) {
+        if (teacherId == null || StringUtils.equals("", teacherId)) {
+            List<TeacherDto> allTeacherDtos = teacherService.getAllTeacherDtos();
+            model.addAttribute("teachers", allTeacherDtos);
+            return "student/teachers";
+        } else {
+            List<Major> majors = majorService.getAllMajors();
+            model.addAttribute("majors", majors);
+            Teacher teacher = teacherService.getTeacherById(teacherId);
+            model.addAttribute("teacher", teacher);
+            return "student/teacher";
+        }
+    }
+
+    @PostMapping("evaluate")
+    public String evaluate(Evaluate evaluate) {
+        evaluateService.createEvaluate(evaluate);
+        return "redirect:/student/evaluate";
     }
 
     @PostMapping("login")
