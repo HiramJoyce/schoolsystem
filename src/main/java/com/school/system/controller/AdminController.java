@@ -1,6 +1,10 @@
 package com.school.system.controller;
 
 import com.school.system.domain.*;
+import com.school.system.domain.dto.ClazzDto;
+import com.school.system.domain.dto.CourseDto;
+import com.school.system.domain.dto.StudentDto;
+import com.school.system.domain.dto.TeacherDto;
 import com.school.system.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,28 +43,32 @@ public class AdminController {
 
     @GetMapping("teacher")
     public String teacher(Model model) {
-        List<Teacher> allTeachers = teacherService.getAllTeachers();
+//        List<Teacher> allTeachers = teacherService.getAllTeachers();
+        List<TeacherDto> allTeachers = teacherService.getAllTeacherDtos();
         model.addAttribute("teachers", allTeachers);
         return "admin/index";
     }
 
     @GetMapping("student")
     public String student(Model model) {
-        List<Student> allStudents = studentService.getAllStudents();
+//        List<Student> allStudents = studentService.getAllStudents();
+        List<StudentDto> allStudents = studentService.getAllStudentDtos();
         model.addAttribute("students", allStudents);
         return "admin/student";
     }
 
     @GetMapping("clazz")
     public String clazz(Model model) {
-        List<Clazz> allClazzs = clazzService.getAllClazzs();
+//        List<Clazz> allClazzs = clazzService.getAllClazzs();
+        List<ClazzDto> allClazzs = clazzService.getAllClazzDtos();
         model.addAttribute("clazzs", allClazzs);
         return "admin/clazz";
     }
 
     @GetMapping("course")
     public String course(Model model) {
-        List<Course> allCourses = courseService.getAllCourses();
+//        List<Course> allCourses = courseService.getAllCourses();
+        List<CourseDto> allCourses = courseService.getAllCourseDtos();
         model.addAttribute("courses", allCourses);
         return "admin/course";
     }

@@ -1,8 +1,10 @@
 package com.school.system.controller;
 
 import com.alibaba.druid.util.StringUtils;
+import com.school.system.domain.Major;
 import com.school.system.domain.Teacher;
 import com.school.system.service.CourseService;
+import com.school.system.service.MajorService;
 import com.school.system.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("teacher")
@@ -21,6 +24,8 @@ public class TeacherController {
     private TeacherService teacherService;
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private MajorService majorService;
 
     @GetMapping("login")
     public String login() {
@@ -54,6 +59,8 @@ public class TeacherController {
 
     @GetMapping("adminUpdate")
     public String update(String id, Model model) {
+        List<Major> majors = majorService.getAllMajors();
+        model.addAttribute("majors", majors);
         if (id != null && !StringUtils.equals(id, "")) {
             Teacher teacher = teacherService.getTeacherById(id);
             model.addAttribute("teacher", teacher);

@@ -2,6 +2,7 @@ package com.school.system.dao;
 
 import com.school.system.domain.Clazz;
 import com.school.system.domain.ClazzExample;
+import com.school.system.domain.dto.ClazzDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -94,4 +95,6 @@ public interface ClazzMapper {
      * @mbg.generated Tue Apr 02 15:48:47 CST 2019
      */
     int updateByPrimaryKey(Clazz record);
+
+    List<ClazzDto> selectAllClazzDtos();
 }

@@ -99,22 +99,34 @@
                                             <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="cc-teacher" class="control-label mb-1">教师ID</label>
-                                            <input id="cc-teacher" name="courseTeacherid" type="text" class="form-control cc-number identified visa" value="${course.courseTeacherid}" data-val="true">
-                                            <span class="help-block" data-valmsg-for="cc-major"
-                                                  data-valmsg-replace="true"></span>
+                                            <label for="cc-clazz" class="control-label mb-1">教师</label>
+                                            <select id="cc-clazz" name="courseTeacherid" type="text" class="form-control cc-number identified visa" data-val="true">
+                                                <c:forEach items="${teachers}" var="teacher">
+                                                    <option value="${teacher.id}" ${course.courseTeacherid == teacher.id ? "selected" : ""}>${teacher.teacherName}</option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="cc-week" class="control-label mb-1">星期</label>
-                                            <input id="cc-week" name="courseWeekday" type="text" class="form-control cc-number identified visa" value="${course.courseWeekday}" data-val="true">
-                                            <span class="help-block" data-valmsg-for="cc-major"
-                                                  data-valmsg-replace="true"></span>
+                                            <select id="cc-week" name="courseWeekday" class="form-control cc-number identified visa" data-val="true">
+                                                <option value="1" ${course.courseWeekday == 1 ? "selected" : ""}>一</option>
+                                                <option value="2" ${course.courseWeekday == 2 ? "selected" : ""}>二</option>
+                                                <option value="3" ${course.courseWeekday == 3 ? "selected" : ""}>三</option>
+                                                <option value="4" ${course.courseWeekday == 4 ? "selected" : ""}>四</option>
+                                                <option value="5" ${course.courseWeekday == 5 ? "selected" : ""}>五</option>
+                                                <option value="6" ${course.courseWeekday == 6 ? "selected" : ""}>六</option>
+                                                <option value="7" ${course.courseWeekday == 7 ? "selected" : ""}>日</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="cc-time" class="control-label mb-1">课时</label>
-                                            <input id="cc-time" name="courseTime" type="text" class="form-control cc-number identified visa" value="${course.courseTime}" data-val="true">
-                                            <span class="help-block" data-valmsg-for="cc-major"
-                                                  data-valmsg-replace="true"></span>
+                                            <select id="cc-time" name="courseTime" class="form-control cc-number identified visa" data-val="true">
+                                                <option value="1" ${course.courseTime == 1 ? "selected" : ""}>第一节</option>
+                                                <option value="2" ${course.courseTime == 2 ? "selected" : ""}>第二节</option>
+                                                <option value="3" ${course.courseTime == 3 ? "selected" : ""}>第三节</option>
+                                                <option value="4" ${course.courseTime == 4 ? "selected" : ""}>第四节</option>
+                                                <option value="5" ${course.courseTime == 5 ? "selected" : ""}>第五节</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="cc-place" class="control-label mb-1">地点</label>
@@ -124,9 +136,10 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="cc-type" class="control-label mb-1">类型</label>
-                                            <input id="cc-type" name="courseType" type="text" class="form-control cc-number identified visa" value="${course.courseType}" data-val="true">
-                                            <span class="help-block" data-valmsg-for="cc-major"
-                                                  data-valmsg-replace="true"></span>
+                                            <select id="cc-type" name="courseType" class="form-control cc-number identified visa" data-val="true">
+                                                <option value="1" ${course.courseType == 1 ? "selected" : ""}>必修</option>
+                                                <option value="2" ${course.courseType == 2 ? "selected" : ""}>选修</option>
+                                            </select>
                                         </div>
                                         <div>
                                             <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">

@@ -2,8 +2,10 @@ package com.school.system.dao;
 
 import com.school.system.domain.Teacher;
 import com.school.system.domain.TeacherExample;
-import java.util.List;
+import com.school.system.domain.dto.TeacherDto;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TeacherMapper {
     /**
@@ -93,4 +95,6 @@ public interface TeacherMapper {
      * @mbg.generated Tue Apr 02 15:48:47 CST 2019
      */
     int updateByPrimaryKey(Teacher record);
+
+    List<TeacherDto> selectAllTeacherDtos();
 }

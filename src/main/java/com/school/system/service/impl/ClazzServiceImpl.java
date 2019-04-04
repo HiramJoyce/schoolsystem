@@ -3,6 +3,7 @@ package com.school.system.service.impl;
 import com.school.system.dao.ClazzMapper;
 import com.school.system.domain.Clazz;
 import com.school.system.domain.ClazzExample;
+import com.school.system.domain.dto.ClazzDto;
 import com.school.system.service.ClazzService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,10 @@ public class ClazzServiceImpl implements ClazzService {
     @Override
     public int deleteById(int id) {
         return clazzMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<ClazzDto> getAllClazzDtos() {
+        return clazzMapper.selectAllClazzDtos();
     }
 }

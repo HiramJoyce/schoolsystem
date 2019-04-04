@@ -110,7 +110,7 @@
                                                                           value="${teacher.id}"></td>
                                                 <td>${teacher.teacherName}</td>
                                                 <td>${teacher.teacherNum}</td>
-                                                <td>${teacher.teacherMajorId}</td>
+                                                <td>${teacher.teacherMajorName}</td>
                                                 <td>${teacher.teacherPassword}</td>
                                                 <td>
                                                     <button onclick="window.location.href='${ctx}/teacher/adminUpdate?id=${teacher.id}'"

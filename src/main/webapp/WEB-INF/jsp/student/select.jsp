@@ -102,8 +102,28 @@
                                             <tr>
                                                 <td class="serial">${statu.index + 1}</td>
                                                 <td>${course.courseName}</td>
-                                                <td><span class="name">${course.courseWeekday}</span></td>
-                                                <td><span class="name">${course.courseTime}</span>
+                                                <td>
+                                                    <span>
+                                                        星期
+                                                        <c:if test="${course.courseWeekday == 1}">一</c:if>
+                                                        <c:if test="${course.courseWeekday == 2}">二</c:if>
+                                                        <c:if test="${course.courseWeekday == 3}">三</c:if>
+                                                        <c:if test="${course.courseWeekday == 4}">四</c:if>
+                                                        <c:if test="${course.courseWeekday == 5}">五</c:if>
+                                                        <c:if test="${course.courseWeekday == 6}">六</c:if>
+                                                        <c:if test="${course.courseWeekday == 7}">日</c:if>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        第
+                                                        <c:if test="${course.courseTime == 1}">一</c:if>
+                                                        <c:if test="${course.courseTime == 2}">二</c:if>
+                                                        <c:if test="${course.courseTime == 3}">三</c:if>
+                                                        <c:if test="${course.courseTime == 4}">四</c:if>
+                                                        <c:if test="${course.courseTime == 5}">五</c:if>
+                                                        节
+                                                    </span>
                                                 </td>
                                                 <td><span class="name">${course.courseTeacherName}</span>
                                                 </td>

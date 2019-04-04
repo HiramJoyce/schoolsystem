@@ -28,7 +28,7 @@
     <nav class="navbar navbar-expand-sm navbar-default">
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li>
+                <li class="active">
                     <a href="${ctx}/admin/teacher"><i class="menu-icon fa fa-calendar"></i>教师管理</a>
                 </li>
                 <li>
@@ -40,7 +40,7 @@
                 <li>
                     <a href="${ctx}/admin/course"> <i class="menu-icon fa fa-clipboard"></i>课程管理</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="${ctx}/admin/profile"> <i class="menu-icon fa fa-user-md"></i>个人信息</a>
                 </li>
             </ul>
@@ -105,10 +105,12 @@
                                                   data-valmsg-replace="true"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">专业ID</label>
-                                            <input id="cc-major" name="teacherMajorId" type="text" class="form-control cc-number identified visa" value="${teacher.teacherMajorId}" data-val="true">
-                                            <span class="help-block" data-valmsg-for="cc-major"
-                                                  data-valmsg-replace="true"></span>
+                                            <label for="cc-major" class="control-label mb-1">专业</label>
+                                            <select id="cc-major" name="teacherMajorId" type="text" class="form-control cc-number identified visa" data-val="true">
+                                                <c:forEach items="${majors}" var="major">
+                                                    <option value="${major.id}" ${teacher.teacherMajorId == major.id ? "selected" : ""}>${major.majorName}</option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="cc-password" class="control-label mb-1">密码</label>

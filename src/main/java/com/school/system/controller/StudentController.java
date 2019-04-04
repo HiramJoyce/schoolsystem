@@ -1,9 +1,13 @@
 package com.school.system.controller;
 
 import com.alibaba.druid.util.StringUtils;
+import com.school.system.domain.Clazz;
+import com.school.system.domain.Major;
 import com.school.system.domain.Student;
 import com.school.system.domain.dto.MajorCourseDto;
+import com.school.system.service.ClazzService;
 import com.school.system.service.CourseService;
+import com.school.system.service.MajorService;
 import com.school.system.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +27,10 @@ public class StudentController {
     private StudentService studentService;
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private MajorService majorService;
+    @Autowired
+    private ClazzService clazzService;
 
     @GetMapping("login")
     public String login() {
@@ -71,6 +79,11 @@ public class StudentController {
 
     @GetMapping("adminUpdate")
     public String update(String id, Model model) {
+        List<Major> majors = majorService.getAllMajors();
+        model.addAttribute("majors", majors);
+        List<Clazz> clazzs = clazzService.getAllClazzs();
+        model.addAttribute("majors", majors);
+        model.addAttribute("clazzs", clazzs);
         if (id != null && !StringUtils.equals(id, "")) {
             Student student = studentService.getStudentById(id);
             model.addAttribute("student", student);

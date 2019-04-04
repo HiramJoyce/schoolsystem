@@ -99,10 +99,12 @@
                                             <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="cc-major" class="control-label mb-1">专业ID</label>
-                                            <input id="cc-major" name="clazzMajorId" type="text" class="form-control cc-number identified visa" value="${clazz.clazzMajorId}" data-val="true">
-                                            <span class="help-block" data-valmsg-for="cc-major"
-                                                  data-valmsg-replace="true"></span>
+                                            <label for="cc-major" class="control-label mb-1">专业</label>
+                                            <select id="cc-major" name="clazzMajorId" type="text" class="form-control cc-number identified visa" data-val="true">
+                                                <c:forEach items="${majors}" var="major">
+                                                    <option value="${major.id}" ${clazz.clazzMajorId == major.id ? "selected" : ""}>${major.majorName}</option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                         <div>
                                             <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">

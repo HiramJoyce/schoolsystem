@@ -283,4 +283,15 @@
       teacher_password = #{teacherPassword,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <resultMap id="TeacherDtoMap" type="com.school.system.domain.dto.TeacherDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
+    <result column="teacher_num" jdbcType="VARCHAR" property="teacherNum" />
+    <result column="teacher_major_id" jdbcType="INTEGER" property="teacherMajorId" />
+      <result column="teacher_major_name" jdbcType="VARCHAR" property="teacherMajorName" />
+      <result column="teacher_password" jdbcType="VARCHAR" property="teacherPassword" />
+  </resultMap>
+  <select id="selectAllTeacherDtos" resultMap="TeacherDtoMap">
+    select t.id, teacher_name, teacher_num, teacher_major_id, m.major_name teacher_major_name, teacher_password from teacher t, major m where t.teacher_major_id=m.id;
+  </select>
 </mapper>

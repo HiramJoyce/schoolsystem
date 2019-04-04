@@ -97,7 +97,7 @@
                                         <tr>
                                             <th class="serial">#</th>
                                             <th>名称</th>
-                                            <th>专业ID</th>
+                                            <th>专业</th>
                                             <th></th>
                                         </tr>
                                         </thead>
@@ -107,7 +107,7 @@
                                                 <td class="serial"><input type="checkbox" name="id"
                                                                           value="${clazz.id}"></td>
                                                 <td>${clazz.clazzName}</td>
-                                                <td>${clazz.clazzMajorId}</td>
+                                                <td>${clazz.clazzMajorName}</td>
                                                 <td>
                                                     <button onclick="window.location.href='${ctx}/clazz/adminUpdate?id=${clazz.id}'"
                                                             type="button" class="btn btn-info btn-sm btn-block"

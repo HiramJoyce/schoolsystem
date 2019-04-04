@@ -98,8 +98,8 @@
                                             <th class="serial">#</th>
                                             <th>姓名</th>
                                             <th>教师编号</th>
-                                            <th>专业ID</th>
-                                            <th>班级ID</th>
+                                            <th>专业</th>
+                                            <th>班级</th>
                                             <th>密码</th>
                                             <th></th>
                                         </tr>
@@ -111,8 +111,8 @@
                                                                           value="${student.id}"></td>
                                                 <td>${student.studentName}</td>
                                                 <td>${student.studentNum}</td>
-                                                <td>${student.studentMajorId}</td>
-                                                <td>${student.studentClassId}</td>
+                                                <td>${student.studentMajorName}</td>
+                                                <td>${student.studentClassName}</td>
                                                 <td>${student.studentPassword}</td>
                                                 <td>
                                                     <button onclick="window.location.href='${ctx}/student/adminUpdate?id=${student.id}'"

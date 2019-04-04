@@ -329,4 +329,17 @@
   <select id="selectAllMajorOptionalCourses" resultMap="MajorCourseDtoMap">
     select c.id id, c.course_name, mc.mc_major_id course_major_id, major_name course_major_name, t.id course_teacher_id, t.teacher_name course_teacher_name, c.course_weekday, c.course_time, c.course_place from major_course mc, major m, course c, teacher t where c.course_type=2 and mc.mc_major_id=#{major} and mc.mc_major_id=m.id and mc.mc_course_id=c.id and c.course_teacherid=t.id
   </select>
+  <resultMap id="courseDtoMap" type="com.school.system.domain.dto.CourseDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="course_name" jdbcType="VARCHAR" property="courseName" />
+    <result column="course_teacherid" jdbcType="VARCHAR" property="courseTeacherid" />
+    <result column="course_teacher_name" jdbcType="INTEGER" property="courseTeacherName" />
+    <result column="course_weekday" jdbcType="INTEGER" property="courseWeekday" />
+    <result column="course_time" jdbcType="INTEGER" property="courseTime" />
+    <result column="course_place" jdbcType="VARCHAR" property="coursePlace" />
+    <result column="course_type" jdbcType="VARCHAR" property="courseType" />
+  </resultMap>
+  <select id="selectAllCourseDtos" resultMap="courseDtoMap">
+    select c.id, course_name, course_teacherid, t.teacher_name course_teacher_name, course_weekday, course_time, course_place, course_type from teacher t, course c where t.id=c.course_teacherid;
+  </select>
 </mapper>

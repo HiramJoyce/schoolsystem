@@ -6,6 +6,7 @@ import com.school.system.domain.Course;
 import com.school.system.domain.CourseExample;
 import com.school.system.domain.CourseStudent;
 import com.school.system.domain.CourseStudentExample;
+import com.school.system.domain.dto.CourseDto;
 import com.school.system.domain.dto.MajorCourseDto;
 import com.school.system.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,5 +85,10 @@ public class CourseServiceImpl implements CourseService {
         CourseStudentExample.Criteria criteria = courseStudentExample.createCriteria();
         criteria.andCsCourseIdEqualTo(Integer.parseInt(courseId)).andCsStudentIdEqualTo(studentId);
         return courseStudentMapper.deleteByExample(courseStudentExample);
+    }
+
+    @Override
+    public List<CourseDto> getAllCourseDtos() {
+        return courseMapper.selectAllCourseDtos();
     }
 }

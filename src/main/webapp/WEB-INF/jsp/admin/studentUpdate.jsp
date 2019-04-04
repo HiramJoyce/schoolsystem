@@ -105,16 +105,20 @@
                                                   data-valmsg-replace="true"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">专业ID</label>
-                                            <input id="cc-major" name="studentMajorId" type="text" class="form-control cc-number identified visa" value="${student.studentMajorId}" data-val="true">
-                                            <span class="help-block" data-valmsg-for="cc-major"
-                                                  data-valmsg-replace="true"></span>
+                                            <label for="cc-major" class="control-label mb-1">专业</label>
+                                            <select id="cc-major" name="studentMajorId" type="text" class="form-control cc-number identified visa" data-val="true">
+                                                <c:forEach items="${majors}" var="major">
+                                                    <option value="${major.id}" ${student.studentMajorId == major.id ? "selected" : ""}>${major.majorName}</option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="cc-number" class="control-label mb-1">班级ID</label>
-                                            <input id="cc-class" name="studentClassId" type="text" class="form-control cc-number identified visa" value="${student.studentClassId}" data-val="true">
-                                            <span class="help-block" data-valmsg-for="cc-major"
-                                                  data-valmsg-replace="true"></span>
+                                            <label for="cc-clazz" class="control-label mb-1">专业</label>
+                                            <select id="cc-clazz" name="studentClassId" type="text" class="form-control cc-number identified visa" data-val="true">
+                                                <c:forEach items="${clazzs}" var="clazz">
+                                                    <option value="${clazz.id}" ${student.studentClassId == clazz.id ? "selected" : ""}>${clazz.clazzName}</option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="cc-password" class="control-label mb-1">密码</label>

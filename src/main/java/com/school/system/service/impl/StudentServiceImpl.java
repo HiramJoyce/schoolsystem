@@ -3,6 +3,7 @@ package com.school.system.service.impl;
 import com.school.system.dao.StudentMapper;
 import com.school.system.domain.Student;
 import com.school.system.domain.StudentExample;
+import com.school.system.domain.dto.StudentDto;
 import com.school.system.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,5 +60,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public int deleteById(int id) {
         return studentMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<StudentDto> getAllStudentDtos() {
+        return studentMapper.selectAllStudentDtos();
     }
 }

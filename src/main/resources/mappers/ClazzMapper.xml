@@ -253,4 +253,13 @@
       clazz_major_id = #{clazzMajorId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <resultMap id="ClazzDtoMap" type="com.school.system.domain.dto.ClazzDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="clazz_name" jdbcType="VARCHAR" property="clazzName" />
+    <result column="clazz_major_id" jdbcType="INTEGER" property="clazzMajorId" />
+    <result column="clazz_major_name" jdbcType="VARCHAR" property="clazzMajorName" />
+  </resultMap>
+  <select id="selectAllClazzDtos" resultMap="ClazzDtoMap">
+    select c.id, clazz_name, clazz_major_id, m.major_name clazz_major_name from clazz c, major m where c.clazz_major_id=m.id;
+  </select>
 </mapper>

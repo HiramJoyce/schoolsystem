@@ -1,7 +1,9 @@
 package com.school.system.service.impl;
 
 import com.school.system.dao.TeacherMapper;
-import com.school.system.domain.*;
+import com.school.system.domain.Teacher;
+import com.school.system.domain.TeacherExample;
+import com.school.system.domain.dto.TeacherDto;
 import com.school.system.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +45,11 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public List<Teacher> getAllTeachers() {
         return teacherMapper.selectByExample(new TeacherExample());
+    }
+
+    @Override
+    public List<TeacherDto> getAllTeacherDtos() {
+        return teacherMapper.selectAllTeacherDtos();
     }
 
     @Override

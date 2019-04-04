@@ -86,52 +86,79 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="box-title">课程管理</h4>
-                                <button onclick="window.location.href='${ctx}/course/adminUpdate'" style="width: 50px; position: absolute; top: 15px; right: 75px; margin: 0;" class="btn btn-success btn-sm btn-block">添加</button>
-                                <button onclick="deleteCourse()" style="width: 50px; position: absolute; top: 15px; right: 15px; margin: 0;" class="btn btn-danger btn-sm btn-block">删除</button>
+                                <button onclick="window.location.href='${ctx}/course/adminUpdate'"
+                                        style="width: 50px; position: absolute; top: 15px; right: 75px; margin: 0;"
+                                        class="btn btn-success btn-sm btn-block">添加
+                                </button>
+                                <button onclick="deleteCourse()"
+                                        style="width: 50px; position: absolute; top: 15px; right: 15px; margin: 0;"
+                                        class="btn btn-danger btn-sm btn-block">删除
+                                </button>
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">
                                     <form action="${ctx}/course/delete" id="courses" method="post">
-                                    <table class="table ">
-                                        <thead>
-                                        <tr>
-                                            <th class="serial">#</th>
-                                            <th>名称</th>
-                                            <th>教师ID</th>
-                                            <th>星期</th>
-                                            <th>课时</th>
-                                            <th>地点</th>
-                                            <th>类型</th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach items="${courses}" var="course" varStatus="statu">
+                                        <table class="table ">
+                                            <thead>
                                             <tr>
-                                                <td class="serial"><input type="checkbox" name="id"
-                                                                          value="${course.id}"></td>
-                                                <td>${course.courseName}</td>
-                                                <td>${course.courseTeacherid}</td>
-                                                <td>${course.courseWeekday}</td>
-                                                <td>${course.courseTime}</td>
-                                                <td>${course.coursePlace}</td>
-                                                <td>${course.courseType}</td>
-                                                <td>
-                                                    <button onclick="window.location.href='${ctx}/course/adminUpdate?id=${course.id}'"
-                                                            type="button" class="btn btn-info btn-sm btn-block"
-                                                            style="width: auto; margin: 0;">
-                                                        修改
-                                                    </button>
-                                                    <button onclick="window.location.href='${ctx}/course/delete?id=${course.id}'"
-                                                            type="button" class="btn btn-danger btn-sm btn-block"
-                                                            style="width: auto; margin: 0;">
-                                                        删除
-                                                    </button>
-                                                </td>
+                                                <th class="serial">#</th>
+                                                <th>名称</th>
+                                                <th>教师</th>
+                                                <th>星期</th>
+                                                <th>课时</th>
+                                                <th>地点</th>
+                                                <th>类型</th>
+                                                <th></th>
                                             </tr>
-                                        </c:forEach>
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${courses}" var="course" varStatus="statu">
+                                                <tr>
+                                                    <td class="serial"><input type="checkbox" name="id"
+                                                                              value="${course.id}"></td>
+                                                    <td>${course.courseName}</td>
+                                                    <td>${course.courseTeacherName}</td>
+                                                    <td>
+                                                        <span>
+                                                            星期
+                                                            <c:if test="${course.courseWeekday == 1}">一</c:if>
+                                                            <c:if test="${course.courseWeekday == 2}">二</c:if>
+                                                            <c:if test="${course.courseWeekday == 3}">三</c:if>
+                                                            <c:if test="${course.courseWeekday == 4}">四</c:if>
+                                                            <c:if test="${course.courseWeekday == 5}">五</c:if>
+                                                            <c:if test="${course.courseWeekday == 6}">六</c:if>
+                                                            <c:if test="${course.courseWeekday == 7}">日</c:if>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <span>
+                                                            第
+                                                            <c:if test="${course.courseTime == 1}">一</c:if>
+                                                            <c:if test="${course.courseTime == 2}">二</c:if>
+                                                            <c:if test="${course.courseTime == 3}">三</c:if>
+                                                            <c:if test="${course.courseTime == 4}">四</c:if>
+                                                            <c:if test="${course.courseTime == 5}">五</c:if>
+                                                            节
+                                                        </span>
+                                                    </td>
+                                                    <td>${course.coursePlace}</td>
+                                                    <td>${course.courseType == 1 ? "必修" : "选修"}</td>
+                                                    <td>
+                                                        <button onclick="window.location.href='${ctx}/course/adminUpdate?id=${course.id}'"
+                                                                type="button" class="btn btn-info btn-sm btn-block"
+                                                                style="width: auto; margin: 0;">
+                                                            修改
+                                                        </button>
+                                                        <button onclick="window.location.href='${ctx}/course/delete?id=${course.id}'"
+                                                                type="button" class="btn btn-danger btn-sm btn-block"
+                                                                style="width: auto; margin: 0;">
+                                                            删除
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                            </tbody>
+                                        </table>
                                     </form>
                                 </div>
                             </div>

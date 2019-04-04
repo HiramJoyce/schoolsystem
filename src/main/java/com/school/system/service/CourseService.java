@@ -1,6 +1,7 @@
 package com.school.system.service;
 
 import com.school.system.domain.Course;
+import com.school.system.domain.dto.CourseDto;
 import com.school.system.domain.dto.MajorCourseDto;
 
 import java.util.List;
@@ -23,4 +24,6 @@ public interface CourseService {
     int insertCourseStudent(String courseId, Integer studentId);
 
     int deleteCourseStudent(String courseId, Integer studentId);
+
+    List<CourseDto> getAllCourseDtos();
 }

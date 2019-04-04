@@ -2,6 +2,7 @@ package com.school.system.dao;
 
 import com.school.system.domain.Course;
 import com.school.system.domain.CourseExample;
+import com.school.system.domain.dto.CourseDto;
 import com.school.system.domain.dto.MajorCourseDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -97,4 +98,6 @@ public interface CourseMapper {
     int updateByPrimaryKey(Course record);
 
     List<MajorCourseDto> selectAllMajorOptionalCourses(int major);
+
+    List<CourseDto> selectAllCourseDtos();
 }

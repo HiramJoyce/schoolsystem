@@ -300,4 +300,17 @@
       student_password = #{studentPassword,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <resultMap id="StudentDtoMap" type="com.school.system.domain.dto.StudentDto">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="student_name" jdbcType="VARCHAR" property="studentName" />
+    <result column="student_num" jdbcType="VARCHAR" property="studentNum" />
+    <result column="student_class_id" jdbcType="INTEGER" property="studentClassId" />
+    <result column="student_class_name" jdbcType="VARCHAR" property="studentClassName" />
+    <result column="student_major_id" jdbcType="INTEGER" property="studentMajorId" />
+    <result column="student_major_name" jdbcType="VARCHAR" property="studentMajorName" />
+    <result column="student_password" jdbcType="VARCHAR" property="studentPassword" />
+  </resultMap>
+  <select id="selectAllStudentDtos" resultMap="StudentDtoMap">
+    select s.id, student_name, student_num, student_class_id, c.clazz_name student_class_name, student_major_id, m.major_name student_major_name, student_password from student s, major m, clazz c where s.student_major_id=m.id and s.student_class_id=c.id;
+  </select>
 </mapper>
