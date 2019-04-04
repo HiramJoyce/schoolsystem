@@ -76,7 +76,7 @@
                     <div class="col-xl-10">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="box-title">学生管理</h4>
+                                <h4 class="box-title">${course.courseName} - 学生管理</h4>
                                 <c:if test="${course.courseType == 2}">
                                     <button onclick="deleteStudent()"
                                             style="width: 50px; position: absolute; top: 15px; right: 15px; margin: 0;"
@@ -91,20 +91,25 @@
                                         <table class="table ">
                                             <thead>
                                             <tr>
-                                                <th class="serial">#</th>
+                                                <c:if test="${course.courseType == 2}">
+                                                    <th class="serial">#</th>
+                                                </c:if>
                                                 <th>姓名</th>
                                                 <th>学生编号</th>
                                                 <th>专业</th>
                                                 <th>班级</th>
                                                 <th>论文</th>
+                                                <th>成绩</th>
                                                 <th></th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <c:forEach items="${students}" var="student" varStatus="statu">
                                                 <tr>
-                                                    <td class="serial"><input type="checkbox" name="studentId"
-                                                                              value="${student.id}"></td>
+                                                    <c:if test="${course.courseType == 2}">
+                                                        <td class="serial"><input type="checkbox" name="studentId"
+                                                                                  value="${student.id}"></td>
+                                                    </c:if>
                                                     <td>${student.studentName}</td>
                                                     <td>${student.studentNum}</td>
                                                     <td>${student.studentMajorName}</td>
@@ -112,12 +117,15 @@
                                                     <td>
                                                         <a href="${ctx}/course/download?file=${student.studentFile}">${student.studentFile}</a>
                                                     </td>
+                                                    <td>${student.studentScore}</td>
                                                     <td>
-                                                        <button onclick="window.location.href='${ctx}/course/score?id=${student.id}'"
-                                                                type="button" class="btn btn-info btn-sm btn-block"
-                                                                style="width: auto; margin: 0;">
-                                                            评分
-                                                        </button>
+                                                        <c:if test="${student.studentScore == null}">
+                                                            <button onclick="window.location.href='${ctx}/course/teacherScore?id=${student.id}'"
+                                                                    type="button" class="btn btn-info btn-sm btn-block"
+                                                                    style="width: auto; margin: 0;">
+                                                                评分
+                                                            </button>
+                                                        </c:if>
                                                         <c:if test="${course.courseType == 2}">
                                                             <button onclick="window.location.href='${ctx}/course/removeStudent?courseId=${course.id}&studentId=${student.id}'"
                                                                     type="button"

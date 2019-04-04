@@ -319,11 +319,12 @@
         <result column="student_major_id" jdbcType="INTEGER" property="studentMajorId" />
         <result column="student_major_name" jdbcType="VARCHAR" property="studentMajorName" />
         <result column="student_file" jdbcType="VARCHAR" property="studentFile" />
+        <result column="student_score" jdbcType="VARCHAR" property="studentScore" />
     </resultMap>
   <select id="selectAllStudentDtos" resultMap="StudentDtoMap">
     select s.id, student_name, student_num, student_class_id, c.clazz_name student_class_name, student_major_id, m.major_name student_major_name, student_password from student s, major m, clazz c where s.student_major_id=m.id and s.student_class_id=c.id;
   </select>
   <select id="selectStudentDtosByMajorId" resultMap="StudentDtoFileMap">
-    select s.id, student_name, student_num, student_class_id, c.clazz_name student_class_name, student_major_id, m.major_name student_major_name, p.paper_file student_file from student s LEFT JOIN paper p on s.id=p.paper_student_id and #{courseId}=p.paper_course_id, major m, clazz c where s.student_major_id=m.id and s.student_major_id in (select mc.mc_major_id from major_course mc where mc.mc_course_id=#{courseId}) and c.id=s.student_class_id;
+    select s.id, student_name, student_num, student_class_id, c.clazz_name student_class_name, student_major_id, m.major_name student_major_name, p.paper_file student_file, score.score_score student_score from student s LEFT JOIN paper p on s.id=p.paper_student_id and #{courseId}=p.paper_course_id left join score on s.id=score.score_student_id and score.score_course_id=#{courseId}, major m, clazz c where s.student_major_id=m.id and s.student_major_id in (select mc.mc_major_id from major_course mc where mc.mc_course_id=#{courseId}) and c.id=s.student_class_id;
   </select>
 </mapper>

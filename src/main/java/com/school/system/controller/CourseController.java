@@ -76,6 +76,11 @@ public class CourseController {
         return "redirect:/course/teacherInfo?id=" + courseId;
     }
 
+    @RequestMapping("teacherScore")
+    public String teacherScore(String studentId) {
+        return "teacher/student";
+    }
+
     @PostMapping("paper")
     public String paper(HttpSession session, Paper paper, @RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request) throws IOException {
         Paper paperDB = paperService.getPaperByStudentIdAndCourseId((Integer) session.getAttribute("id"), paper.getPaperCourseId());
