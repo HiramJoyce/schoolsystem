@@ -24,4 +24,6 @@ public interface StudentService {
     List<StudentDto> getAllStudentDtos();
 
     JSONArray getStudentCourses(Integer studentId);
+
+    int removeStudentFromCourseById(int studentId, int courseId);
 }

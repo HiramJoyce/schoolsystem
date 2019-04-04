@@ -7,11 +7,12 @@ import com.school.system.domain.Score;
 import com.school.system.domain.Teacher;
 import com.school.system.domain.dto.CourseDto;
 import com.school.system.domain.dto.StudentFileDto;
-import com.school.system.service.CourseService;
-import com.school.system.service.PaperService;
-import com.school.system.service.ScoreService;
-import com.school.system.service.TeacherService;
+import com.school.system.service.*;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +42,8 @@ public class CourseController {
     private ScoreService scoreService;
     @Autowired
     private PaperService paperService;
+    @Autowired
+    private StudentService studentService;
 
     @GetMapping("info")
     public String info(String id, Model model, HttpSession session) {
@@ -54,9 +58,22 @@ public class CourseController {
 
     @GetMapping("teacherInfo")
     public String teacherInfo(String id, Model model) {
+        CourseDto course = courseService.getCouseDtoById(Integer.parseInt(id));
+        model.addAttribute("course", course);
         List<StudentFileDto> studentDtos = courseService.getCourseStudentsByCourseId(Integer.parseInt(id));
         model.addAttribute("students", studentDtos);
         return "teacher/course";
+    }
+
+    @RequestMapping("removeStudent")
+    public String removeStudent(String studentId, String courseId) {
+        if (studentId != null) {
+            String ids[] = studentId.split(",");
+            for (String id1 : ids) {
+                studentService.removeStudentFromCourseById(Integer.parseInt(id1), Integer.parseInt(courseId));
+            }
+        }
+        return "redirect:/course/teacherInfo?id=" + courseId;
     }
 
     @PostMapping("paper")
@@ -83,6 +100,18 @@ public class CourseController {
         System.out.println("create -> " + paper.toString());
         paperService.createPaper(paper);
         return "redirect:/course/info?id=" + paper.getPaperCourseId();
+    }
+
+    @RequestMapping("download")
+    public ResponseEntity<byte[]> download(String file, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (file != null) {
+            File filet = new File(request.getServletContext().getRealPath("/resource/uploadFile/" + file));
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.add("Content-Disposition", "attchement;filename=" + file.substring(0, 10) + file.substring(file.lastIndexOf(".")));
+            HttpStatus statusCode = HttpStatus.OK;
+            return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(filet), httpHeaders, statusCode);
+        }
+		return null;
     }
 
     @GetMapping("adminUpdate")

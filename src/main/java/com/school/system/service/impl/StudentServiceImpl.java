@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.school.system.dao.CourseStudentMapper;
 import com.school.system.dao.MajorCourseMapper;
 import com.school.system.dao.StudentMapper;
+import com.school.system.domain.CourseStudentExample;
 import com.school.system.domain.MajorCourseExample;
 import com.school.system.domain.Student;
 import com.school.system.domain.StudentExample;
@@ -152,6 +153,14 @@ public class StudentServiceImpl implements StudentService {
         courses.add(saturday);
         courses.add(sunday);
         return courses;
+    }
+
+    @Override
+    public int removeStudentFromCourseById(int studentId, int courseId) {
+        CourseStudentExample courseStudentExample = new CourseStudentExample();
+        CourseStudentExample.Criteria criteria = courseStudentExample.createCriteria();
+        criteria.andCsStudentIdEqualTo(studentId).andCsCourseIdEqualTo(courseId);
+        return courseStudentMapper.deleteByExample(courseStudentExample);
     }
 
     private void setCourses(String[] weekday, CourseDto optionCourseDto) {

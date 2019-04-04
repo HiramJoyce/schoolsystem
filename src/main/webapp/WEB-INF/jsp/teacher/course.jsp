@@ -77,50 +77,60 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="box-title">学生管理</h4>
-                                <button onclick="window.location.href='${ctx}/course/removeStudent'" style="width: 50px; position: absolute; top: 15px; right: 75px; margin: 0;" class="btn btn-success btn-sm btn-block">添加</button>
-                                <button onclick="deleteStudent()" style="width: 50px; position: absolute; top: 15px; right: 15px; margin: 0;" class="btn btn-danger btn-sm btn-block">删除</button>
+                                <c:if test="${course.courseType == 2}">
+                                    <button onclick="deleteStudent()"
+                                            style="width: 50px; position: absolute; top: 15px; right: 15px; margin: 0;"
+                                            class="btn btn-danger btn-sm btn-block">删除
+                                    </button>
+                                </c:if>
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">
-                                    <form action="${ctx}/student/delete" id="students" method="post">
-                                    <table class="table ">
-                                        <thead>
-                                        <tr>
-                                            <th class="serial">#</th>
-                                            <th>姓名</th>
-                                            <th>学生编号</th>
-                                            <th>专业</th>
-                                            <th>班级</th>
-                                            <th>论文</th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach items="${students}" var="student" varStatus="statu">
+                                    <form action="${ctx}/course/removeStudent" id="students" method="post">
+                                        <input type="hidden" name="courseId" value="${course.id}">
+                                        <table class="table ">
+                                            <thead>
                                             <tr>
-                                                <td class="serial"><input type="checkbox" name="id"
-                                                                          value="${student.id}"></td>
-                                                <td>${student.studentName}</td>
-                                                <td>${student.studentNum}</td>
-                                                <td>${student.studentMajorName}</td>
-                                                <td>${student.studentClassName}</td>
-                                                <td>${student.studentFile}</td>
-                                                <td>
-                                                    <button onclick="window.location.href='${ctx}/course/score?id=${student.id}'"
-                                                            type="button" class="btn btn-info btn-sm btn-block"
-                                                            style="width: auto; margin: 0;">
-                                                        评分
-                                                    </button>
-                                                    <button onclick="window.location.href='${ctx}/course/removeStudent?id=${student.id}'"
-                                                            type="button" class="btn btn-danger btn-sm btn-block"
-                                                            style="width: auto; margin: 0;">
-                                                        删除
-                                                    </button>
-                                                </td>
+                                                <th class="serial">#</th>
+                                                <th>姓名</th>
+                                                <th>学生编号</th>
+                                                <th>专业</th>
+                                                <th>班级</th>
+                                                <th>论文</th>
+                                                <th></th>
                                             </tr>
-                                        </c:forEach>
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${students}" var="student" varStatus="statu">
+                                                <tr>
+                                                    <td class="serial"><input type="checkbox" name="studentId"
+                                                                              value="${student.id}"></td>
+                                                    <td>${student.studentName}</td>
+                                                    <td>${student.studentNum}</td>
+                                                    <td>${student.studentMajorName}</td>
+                                                    <td>${student.studentClassName}</td>
+                                                    <td>
+                                                        <a href="${ctx}/course/download?file=${student.studentFile}">${student.studentFile}</a>
+                                                    </td>
+                                                    <td>
+                                                        <button onclick="window.location.href='${ctx}/course/score?id=${student.id}'"
+                                                                type="button" class="btn btn-info btn-sm btn-block"
+                                                                style="width: auto; margin: 0;">
+                                                            评分
+                                                        </button>
+                                                        <c:if test="${course.courseType == 2}">
+                                                            <button onclick="window.location.href='${ctx}/course/removeStudent?courseId=${course.id}&studentId=${student.id}'"
+                                                                    type="button"
+                                                                    class="btn btn-danger btn-sm btn-block"
+                                                                    style="width: auto; margin: 0;">
+                                                                删除
+                                                            </button>
+                                                        </c:if>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                            </tbody>
+                                        </table>
                                     </form>
                                 </div>
                             </div>
@@ -140,7 +150,7 @@
 <script>
     function deleteStudent() {
         let ids = "";
-        $("input:checkbox[name='id']:checked").each(function () {
+        $("input:checkbox[name='studentId']:checked").each(function () {
             ids += $(this).val() + ",";
         });
         //判断最后一个字符是否为逗号，若是截取
