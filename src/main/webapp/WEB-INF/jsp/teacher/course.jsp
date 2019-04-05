@@ -120,7 +120,7 @@
                                                     <td>${student.studentScore}</td>
                                                     <td>
                                                         <c:if test="${student.studentScore == null}">
-                                                            <button onclick="window.location.href='${ctx}/course/teacherScore?id=${student.id}'"
+                                                            <button onclick="window.location.href='${ctx}/course/teacherScore?studentId=${student.id}&courseId=${course.id}'"
                                                                     type="button" class="btn btn-info btn-sm btn-block"
                                                                     style="width: auto; margin: 0;">
                                                                 评分

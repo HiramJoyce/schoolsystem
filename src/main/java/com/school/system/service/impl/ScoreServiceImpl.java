@@ -23,4 +23,9 @@ public class ScoreServiceImpl implements ScoreService {
         List<Score> scores = scoreMapper.selectByExample(scoreExample);
         return scores != null && scores.size() > 0 ? scores.get(0) : null;
     }
+
+    @Override
+    public int createScore(Score score) {
+        return scoreMapper.insert(score);
+    }
 }

@@ -1,10 +1,7 @@
 package com.school.system.controller;
 
 import com.alibaba.druid.util.StringUtils;
-import com.school.system.domain.Course;
-import com.school.system.domain.Paper;
-import com.school.system.domain.Score;
-import com.school.system.domain.Teacher;
+import com.school.system.domain.*;
 import com.school.system.domain.dto.CourseDto;
 import com.school.system.domain.dto.StudentFileDto;
 import com.school.system.service.*;
@@ -15,10 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,9 +70,20 @@ public class CourseController {
         return "redirect:/course/teacherInfo?id=" + courseId;
     }
 
-    @RequestMapping("teacherScore")
-    public String teacherScore(String studentId) {
+    @GetMapping("teacherScore")
+    public String teacherScore(String studentId, String courseId, Model model) {
+        Student studentById = studentService.getStudentById(studentId);
+        CourseDto courseDtoById = courseService.getCouseDtoById(Integer.parseInt(courseId));
+        model.addAttribute("student", studentById);
+        model.addAttribute("course", courseDtoById);
         return "teacher/student";
+    }
+
+    @PostMapping("teacherScore")
+    public String teacherScore(Score score) {
+        System.out.println(score);
+        scoreService.createScore(score);
+        return "redirect:/course/teacherInfo?id=" + score.getScoreCourseId();
     }
 
     @PostMapping("paper")
